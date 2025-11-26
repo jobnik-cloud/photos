@@ -4,7 +4,8 @@ FROM node:24-alpine AS builder
 WORKDIR /app
 
 # Install PHP and composer for PHP dependencies
-RUN apk add --no-cache php83 php83-phar php83-openssl php83-mbstring php83-xml php83-curl php83-zip php83-dom php83-tokenizer php83-xmlwriter php83-fileinfo php83-intl curl
+# Note: php83-exif is required by woltlab/webp-exif dependency
+RUN apk add --no-cache php83 php83-phar php83-openssl php83-mbstring php83-xml php83-curl php83-zip php83-dom php83-tokenizer php83-xmlwriter php83-fileinfo php83-intl php83-exif curl
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && chmod +x /usr/local/bin/composer
 
 # Copy package files
